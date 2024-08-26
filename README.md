@@ -21,9 +21,8 @@
 
 ## Installation
 
-Requires python >= 3.11
-
-Currently only works on Windows
+- Requires python >= 3.11
+- Currently only works on Windows
 
 1. **Install neuralfoil-standalone**  
    Get `neuralfoil-standalone` from [this repository](https://github.com/pedro-crb/neuralfoil-standalone) and follow the installation instructions.
