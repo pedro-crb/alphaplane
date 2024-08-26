@@ -4,6 +4,10 @@ setup(
     name='alphaplane',
     version='0.1.0',
     packages=find_packages(),
+    package_data={
+        'alphaplane': ['*.exe', '*.json', '*.dat', '*.PE0'],
+    },
+    include_package_data=True,
     install_requires=[
         'dill>=0.3.8',
         'matplotlib>=3.9.2',
