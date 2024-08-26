@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Union
-
 import numpy as np
 
 from alphaplane.analysis_tools.analysis_condition import AnalysisCondition

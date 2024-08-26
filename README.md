@@ -1,0 +1,1 @@
+alphaplane is an aircraft analysis and design library, currently in early development
