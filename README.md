@@ -36,6 +36,7 @@
 ## Documentation
 
 *Currently work in progress...*
+Check out the `examples` folder for some use cases
 
 ## Future Plans
 
