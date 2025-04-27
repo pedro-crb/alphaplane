@@ -12,7 +12,12 @@ from alphaplane.analysis_tools.analysis_condition import AnalysisCondition
 
 
 class AnalysisData:
-    def __init__(self, condition_type, output_var_names, allow_interpolation: bool = True):
+    def __init__(
+            self, 
+            condition_type, 
+            output_var_names, 
+            allow_interpolation: bool = True
+        ):
         self._condition_type = condition_type
         self._input_var_names = condition_type().var_names
         self._output_var_names = output_var_names
@@ -20,8 +25,8 @@ class AnalysisData:
         self._num_outputs = len(self._output_var_names)
         self._allow_interpolation = allow_interpolation
 
-        self._condition_structured: condition_type | None = None
-        self._condition_unstructured: condition_type | None = None
+        self._condition_structured = None
+        self._condition_unstructured = None
         self._data_structured: np.ndarray | None = None
         self._data_ndpolator: RegularGridInterpolator | None = None
         self._data_unstructured: np.ndarray | None = None

@@ -302,7 +302,7 @@ class Curve2d:
 
         return fig, ax
 
-    def plot_comb(self, data: np.ndarray | list[float],
+    def plot_comb(self, data,
                   scale_factor: float = 1.0,
                   label: str | None = None,
                   legend: bool | None = None,
@@ -381,7 +381,7 @@ class Curve2d:
 
         return fig, ax
 
-    def plot_colorline(self, data: np.ndarray | list[float],
+    def plot_colorline(self, data,
                        label: Optional[str] = None,
                        legend: bool = False,
                        colormap: Optional[str] = None,

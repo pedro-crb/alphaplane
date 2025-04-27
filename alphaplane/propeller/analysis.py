@@ -196,11 +196,11 @@ class PropellerAnalysis:
 
         dQdr = rho * B * Gamma * r * (W_a + (CD / CL) * W_t)
 
-        T = np.trapz(dTdr, r)
-        Q = np.trapz(dQdr, r)
+        T = np.trapezoid(dTdr, r)
+        Q = np.trapezoid(dQdr, r)
         prop_results = {
-            'CT': float(T / (rho * (rpm / 60) ** 2 * (2 * R) ** 4)),
-            'CP': float(2 * np.pi * Q / (rho * (rpm / 60) ** 2 * (2 * R) ** 5)),
+            'CT': float(T / (rho * (rpm / 60) ** 2 * (2 * R) ** 4)), # type: ignore
+            'CP': float(2 * np.pi * Q / (rho * (rpm / 60) ** 2 * (2 * R) ** 5)), # type: ignore
             'thrust': T,
             'torque': Q
         }

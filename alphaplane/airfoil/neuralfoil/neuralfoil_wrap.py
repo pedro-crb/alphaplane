@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import neuralfoil_standalone as nf
+import neuralfoil as nf
 import numpy as np
 import copy
 

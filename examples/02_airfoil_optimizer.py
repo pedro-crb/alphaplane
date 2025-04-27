@@ -4,7 +4,7 @@ import alphaplane as ap
 import numpy as np
 
 from alphaplane.numerical_tools.array_operations import monotonic_indices
-from neuralfoil_standalone import get_aero_with_corrections
+from alphaplane.airfoil.neuralfoil import get_aero_with_corrections
 from scipy.interpolate import interp1d
 from scipy.signal import find_peaks
 

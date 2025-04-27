@@ -1038,7 +1038,7 @@ class Propeller:
         airfoils = [Airfoil.from_foil_interpolation(
             foils, weights) for foils in all_airfoils.T]
         airfoils = list(zip(stations, airfoils))
-        final_prop = cls(n_blades, stations, chords, twists, airfoils,
+        final_prop = cls(n_blades, stations, chords, twists, airfoils, # type: ignore
                          offsets_x, offsets_z, thickness, name=name)
         return final_prop
 
