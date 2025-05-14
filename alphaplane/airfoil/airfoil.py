@@ -790,7 +790,7 @@ class Airfoil(_AirfoilBase):
             name = airfoil_name.rsplit('.', 1)[0]
 
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        airfoil_path = os.path.join(script_dir, 'selig_database', airfoil_name)
+        airfoil_path = os.path.join(script_dir, 'selig_database', airfoil_name.lower())
 
         if not os.path.isfile(airfoil_path):
             raise Exception(f"Airfoil '{airfoil_name}' not found in database")

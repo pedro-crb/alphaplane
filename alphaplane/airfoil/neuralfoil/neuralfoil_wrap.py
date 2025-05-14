@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import neuralfoil as nf
+from .neuralfoil import get_aero_with_corrections
 import numpy as np
 import copy
 
@@ -22,7 +22,7 @@ def run_from_airfoil(airfoil: Airfoil, condition: AirfoilCondition, model_size: 
     else:
         params = current_condition.parameter_grid().reshape(-1, current_condition.num_params())
 
-    results = nf.get_aero_with_corrections(
+    results = get_aero_with_corrections(
         kulfan_parameters=airfoil.neuralfoil_parameters(),
         alpha=params[:, 0],
         Re=params[:, 1],
@@ -58,7 +58,7 @@ def run_from_kulfan_params(kulfan_params: dict, condition: AirfoilCondition, mod
         params = current_condition.parameter_sequence()
     else:
         params = current_condition.parameter_grid().reshape(-1, current_condition.num_params())
-    results = nf.get_aero_with_corrections(
+    results = get_aero_with_corrections(
         kulfan_parameters=kulfan_params,
         alpha=params[:, 0],
         Re=params[:, 1],
