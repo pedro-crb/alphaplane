@@ -112,6 +112,7 @@ class Propeller:
                 airfoil = self._airfoils[0][1]
                 thickness = airfoil.thickness_max
                 thickness = np.ones_like(self.stations) * thickness
+                self._thickness = thickness
                 return thickness
 
             stations, airfoils = zip(*self.airfoils)
@@ -121,7 +122,8 @@ class Propeller:
                 stations, thickness,
                 fill_value=fill_value,  # type: ignore
                 bounds_error=False)
-            return thickness_function(self.stations)
+            self._thickness = thickness_function(self.stations)
+            return self._thickness
 
         return np.array(self._thickness, copy=True)
 
@@ -560,8 +562,7 @@ class Propeller:
                          repair: bool = True) -> None:
         _, airfoils_list = zip(*self._airfoils)
         for airfoil in airfoils_list:
-            airfoil.repanel(
-                num_pts, bunching_strength=bunching_strength, repair=repair)
+            airfoil.repanel(num_pts, bunching_strength=bunching_strength, repair=repair)
         self._clear_geometry_data()
         self._clear_analyzed_foils()
 
@@ -607,9 +608,9 @@ class Propeller:
         self.set_airfoils(new_airfoils)
 
     def set_airfoils_TE(self, TE_gap: float) -> None:
-        _, airfoils_list = zip(*self._airfoils)
-        for airfoil in airfoils_list:
+        for _, airfoil in self._airfoils:
             airfoil.set_TE_gap(TE_gap)
+            airfoil.repair_geometry()
         self._clear_geometry_data()
         self._clear_analyzed_foils()
 
@@ -689,13 +690,13 @@ class Propeller:
         self.analysis.clear_analyzed_airfoils()
 
     def to_csv(self, output_path: str, include_root: bool = False,
-               include_TE_gap: float = 0.01) -> None:
+               include_TE_gap: float = 0.02) -> None:
         dummy_prop = copy.deepcopy(self)
         if include_TE_gap > 0:
             dummy_prop.set_airfoils_TE(include_TE_gap)
 
-        points3d = self.points3d_with_transition if include_root else self.points3d
-        stations = self.stations_with_transition if include_root else self.stations
+        points3d = dummy_prop.points3d_with_transition if include_root else dummy_prop.points3d
+        stations = dummy_prop.stations_with_transition if include_root else dummy_prop.stations
         assert stations is not None and points3d is not None
         with open(output_path, 'w', newline='') as csvfile:
             csvwriter = csv.writer(csvfile)
