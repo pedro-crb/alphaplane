@@ -1,0 +1,6 @@
+dill>=0.3.8
+matplotlib>=3.9.2
+numpy>=1.26.4
+pandas>=2.2.2
+pyvista>=0.44.1
+scipy>=1.14.1

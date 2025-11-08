@@ -1,0 +1,2 @@
+from .neuralfoil_wrap import run_from_airfoil
+from .neuralfoil import get_aero_with_corrections, get_aero_from_kulfan_parameters

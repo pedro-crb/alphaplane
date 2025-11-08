@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Union
 
+import os
 import copy
 import warnings
 import numpy as np
@@ -237,6 +238,31 @@ class PropellerAnalysis:
             rpm = [0]
             for lin in file.readlines():
                 parse_polar(lin, rpm)
+
+        self.data.add_unstructured_data(np.array(data))
+        self.data.regularize_unstructured_points()
+
+    def polars_from_UIUC(self, raw_prop_name: str) -> None:
+        data = []
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        database_path = os.path.join(script_dir, 'uiuc_database')
+        polar_paths = []
+        rpms = []
+        for filename in os.listdir(database_path):
+            filename_data = filename.removesuffix(".txt").split("_")
+            if filename_data[0] != raw_prop_name:
+                continue
+            if filename_data[1] != "static":
+                rpms.append(float(filename_data[1]))
+                polar_paths.append(os.path.join(database_path, filename))
+
+        for polar_path, rpm in zip(polar_paths, rpms):
+            with open(polar_path, 'r') as file:
+                for line in file:
+                    line_data = line.split()
+                    if line_data[0] == "J":
+                        continue
+                    data.append([float(line_data[0]), float(rpm), float(line_data[1]), float(line_data[2])])
 
         self.data.add_unstructured_data(np.array(data))
         self.data.regularize_unstructured_points()

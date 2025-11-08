@@ -900,7 +900,8 @@ class Propeller:
         return new_prop
 
     @classmethod
-    def from_APC_database(cls, propeller_name: str, load_polars: bool = True, name: str | None = None) -> Self:
+    def from_APC_database(cls, propeller_name: str, 
+                          load_polars: str | bool | None = True, name: str | None = None) -> Self:
         script_dir = os.path.dirname(os.path.abspath(__file__))
         propeller_filename = propeller_name.replace('.', '')
         geometry_path = os.path.join(
@@ -910,13 +911,19 @@ class Propeller:
                 f"Propeller '{propeller_name}' not found in database")
         prop = cls.from_APC_file(geometry_path, name)
 
-        if load_polars:
+        if load_polars==True or load_polars=="APC":
             polar_path = os.path.join(
                 script_dir, 'apc_database', 'performance', f'PER3_{propeller_filename}.dat')
             if not os.path.isfile(polar_path):
                 raise Exception(
-                    f"Performance data for '{propeller_name}' not found in database")
+                    f"Performance data for '{propeller_name}' not found in APC database")
             prop.analysis.polars_from_APC(polar_path)
+        elif load_polars=="UIUC":
+            polar_path = os.path.join(script_dir, 'uiuc_database', f'{propeller_filename}_static.txt')
+            if not os.path.isfile(polar_path):
+                raise Exception(
+                    f"Performance data for '{propeller_name}' not found in UIUC database")
+            prop.analysis.polars_from_UIUC(propeller_filename)
 
         return prop
 

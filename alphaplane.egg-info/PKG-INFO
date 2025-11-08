@@ -1,0 +1,25 @@
+Metadata-Version: 2.4
+Name: alphaplane
+Version: 0.1.0
+Summary: alphaplane is an aircraft analysis and design library
+Home-page: https://github.com/pedro-crb/alphaplane_release
+Author: Pedro Ribeiro
+Author-email: pedro.c.rib@usp.br
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+Requires-Dist: dill>=0.3.8
+Requires-Dist: matplotlib>=3.9.2
+Requires-Dist: numpy>=1.26.4
+Requires-Dist: pandas>=2.2.2
+Requires-Dist: pyvista>=0.44.1
+Requires-Dist: scipy>=1.14.1
+Dynamic: author
+Dynamic: author-email
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
+
+
